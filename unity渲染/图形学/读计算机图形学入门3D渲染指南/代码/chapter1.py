@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class Sphere:
@@ -43,26 +44,61 @@ class Canvan:
         return t1, t2
 
     def TraceRay(self, O, D, sphere, t_min, t_max):
-        closest_t = None
+        closest_t = float("inf")
         closest_sphere = None
         for s in sphere:
             t1, t2 = self.SphereIntersection(O, D, s)
-            if t1 is None and t2 is not None:
-                closest_t = t2 if t1 > t2 else t1
-                closest_sphere = s
-        if closest_t is not None and t_min < closest_t < t_max:
+            if t1 is not None:
+                if (
+                    t1 > t_min
+                    and t1 < t_max
+                    and (closest_sphere is None or t1 < closest_t)
+                ):
+                    closest_t = t1
+                    closest_sphere = s
+                if (
+                    t2 > t_min
+                    and t2 < t_max
+                    and (closest_sphere is None or t2 < closest_t)
+                ):
+                    closest_t = t2
+                    closest_sphere = s
+        if closest_sphere is not None:
             return closest_sphere.color
         return np.array([0, 0, 0])
 
 
 if __name__ == "__main__":
-    canvas = Canvan(800, 600, 1)
-    canvas.InitView(800, 600)
+    # 设置画布尺寸（像素数量）
+    width, height = 800, 800
+    canvas = Canvan(1, 1, 1)
+    canvas.InitView(1, 1)
     O = np.array([0, 0, 0])
-    for y in range(-300, 300):
-        for x in range(-400, 400):
+
+    # 创建图像数组
+    image = np.zeros((height, width, 3))
+
+    # 计算步长
+    step_x = canvas.view.Cw / width
+    step_y = canvas.view.Ch / height
+
+    # 遍历每个像素
+    for i in range(height):
+        y = canvas.view.Ch / 2 - i * step_y  # 从上到下渲染
+        for j in range(width):
+            x = -canvas.view.Cw / 2 + j * step_x  # 从左到右渲染
+
             X, Y, Z = canvas.CanvasToViewport(x, y)
             D = np.array([X, Y, Z])
             D = D / np.linalg.norm(D)
             color = canvas.TraceRay(O, D, canvas.sphere_list, 0.1, 100)
-            print(f"Pixel ({x}, {y}): Color: {color}")
+
+            # 将颜色存储到图像数组（颜色值范围从0-255转换到0-1）
+            image[i, j] = color / 255.0
+
+    # 显示渲染结果
+    plt.figure(figsize=(8, 8))
+    plt.imshow(image)
+    plt.axis("off")  # 隐藏坐标轴
+    plt.title("Ray Tracing Result")
+    plt.show()
