@@ -8,3 +8,4 @@ GitHub：https://github.com/OI-wiki/OI-wiki
 https://oi-wiki.org/
 
 ## 准备开个新坑
+# 目前在期末周（拖更中）
