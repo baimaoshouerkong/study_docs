@@ -7,5 +7,4 @@ https://www.epubit.com/bookDetails?id=UB7d4a10dcb252b&typeName=%E8%AE%A1%E7%AE%9
 GitHub：https://github.com/OI-wiki/OI-wiki
 https://oi-wiki.org/
 
-## 准备开个新坑
 
