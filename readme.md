@@ -3,6 +3,9 @@
 # 这里是注明来处的
 ## 计算机图形学入门3D渲染指南
 https://www.epubit.com/bookDetails?id=UB7d4a10dcb252b&typeName=%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8%EF%BC%9A3D%E6%B8%B2%E6%9F%93%E6%8C%87%E5%8D%97
+## 计算机渲染
+根据https://github.com/Pleasant233/Pleasant233.github.io ，B站链接BV1CQLWzfEca
+
 ## 数据结构与算法
 GitHub：https://github.com/OI-wiki/OI-wiki
 https://oi-wiki.org/
